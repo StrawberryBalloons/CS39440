@@ -243,10 +243,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e5fda074b5d6044b902f74c63e690a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  draw: 1
   width: 100
   height: 100
-  noiseModifier: 0.3
+  noiseModifier: 213.7
+  oct: 3
+  persist: 0.26
+  lac: 3.53
   autoUpdate: 1
+  biomes:
+  - height: 0.3
+    colour: {r: 0.18614274, g: 0.40252674, b: 0.8396226, a: 0}
+    name: Deep Ocean
+  - height: 0.4
+    colour: {r: 0.28502133, g: 0.45014215, b: 0.990566, a: 0}
+    name: sea
+  - height: 0.45
+    colour: {r: 0.9433962, g: 0.9088631, b: 0.5473478, a: 0}
+    name: sand
+  - height: 0.55
+    colour: {r: 0.16220188, g: 0.764151, b: 0.19692971, a: 0}
+    name: plains
+  - height: 0.6
+    colour: {r: 0.19961143, g: 0.6320754, b: 0.14609292, a: 0}
+    name: highland
+  - height: 0.7
+    colour: {r: 0.3529412, g: 0.27058825, b: 0.23529412, a: 0}
+    name: rock
+  - height: 0.9
+    colour: {r: 0.29411766, g: 0.23529412, b: 0.20784314, a: 0}
+    name: rock2
+  - height: 1
+    colour: {r: 1, g: 1, b: 1, a: 0}
+    name: snow
 --- !u!4 &2120734457
 Transform:
   m_ObjectHideFlags: 0
