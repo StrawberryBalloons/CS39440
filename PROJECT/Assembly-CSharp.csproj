@@ -62,8 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FallOff.cs" />
     <Compile Include="Assets\Scripts\MapDisplay.cs" />
     <Compile Include="Assets\Scripts\MapGen.cs" />
+    <Compile Include="Assets\Scripts\MeshGen.cs" />
     <Compile Include="Assets\Scripts\NoiseMap.cs" />
     <Compile Include="Assets\Scripts\textureGen.cs" />
     <Compile Include="Assets\SuperScripts\MapGenEdit.cs" />
