@@ -67,8 +67,14 @@
     <Compile Include="Assets\Scripts\MapGen.cs" />
     <Compile Include="Assets\Scripts\MeshGen.cs" />
     <Compile Include="Assets\Scripts\NoiseMap.cs" />
+    <Compile Include="Assets\Scripts\Storage\NoiseStorage.cs" />
+    <Compile Include="Assets\Scripts\Storage\TerrainStorage.cs" />
+    <Compile Include="Assets\Scripts\Storage\TextureStorage.cs" />
+    <Compile Include="Assets\Scripts\Storage\Updater.cs" />
     <Compile Include="Assets\Scripts\textureGen.cs" />
     <Compile Include="Assets\SuperScripts\MapGenEdit.cs" />
+    <Compile Include="Assets\SuperScripts\UpdateData.cs" />
+    <None Include="Assets\Scripts\ExampleShader.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Callum Gunter/Documents/GitHub/CS39440/PROJECT/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
