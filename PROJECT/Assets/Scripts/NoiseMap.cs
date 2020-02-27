@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NoiseMap{
+    //this is the most needed class
     public static float[,] GenMap(int width, int height, float modifier, int oct, float persist, float lac){
         float[,] map = new float[width, height];
 

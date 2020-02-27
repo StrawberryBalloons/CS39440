@@ -18,7 +18,7 @@ public class MapDisplay : MonoBehaviour
     }
 
     public void DrawMesh(MData mData, Texture2D tex)
-    {
+    {//updates the mesh, some issues with physics preventing deletion of mesh colliders
 
         if (!GameObject.Find("Meshy"))
         {

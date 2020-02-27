@@ -8,7 +8,7 @@ public class MapGen : MonoBehaviour
 
         public enum Draw
     {
-        nMap, cMap, mesh, fallOff
+        nMap, cMap, mesh, fallOff, tMap
     };
     public Draw draw;
     public int width;
@@ -20,7 +20,8 @@ public class MapGen : MonoBehaviour
     public NoiseStorage noiseStorage;
     public TextureStorage textureStorage;
 
-    public Terrain[] biomes;
+    public Terrain[] biomes; //just colours really, only needed for the Colour map now
+    public Terrain[] temp; //just colours really, only needed for the Colour map now
 
     public Material terrainMaterial;
 
@@ -30,13 +31,13 @@ public class MapGen : MonoBehaviour
     {
         if (!Application.isPlaying)
         {
-            GenMap();
+            GenMap();//refreshes the map
         }
     }
 
     private void Awake()
     {
-        fall = FallOff.GenFallOffMap(100);
+        fall = FallOff.GenFallOffMap(100);//makes an island, may come in useful later
     }
 
     public void GenMap()
@@ -54,7 +55,10 @@ public class MapGen : MonoBehaviour
 
         fall = FallOff.GenFallOffMap(100); 
         float[,] nMap = NoiseMap.GenMap(width, height, noiseStorage.noiseModifier, noiseStorage.oct, noiseStorage.persist, noiseStorage.lac);
+        //gets the Noisemap from the example files
         Color[] cMap = new Color[width * height];
+        Color[] tMap = new Color[width * height];
+        //gets the colours by width and height
         for(int y = 0; y <height; y++)
         {
             for(int x =0; x < width; x++)
@@ -64,23 +68,38 @@ public class MapGen : MonoBehaviour
                     nMap[x, y] = Mathf.Clamp01(nMap[x, y] - fall[x, y]);
                 }
                 float currentHeight = nMap[x, y];
+                //gets the value of the noise at location x, y
                 for (int i =0; i<biomes.Length;i++)
                 {
                     if(currentHeight <= biomes[i].height)
                     {
                         cMap[y * width + x] = biomes[i].colour;
+                        //sets a colour based on height
+                        break;
+                    }
+                }
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    if (currentHeight <= temp[i].height)
+                    {
+                        tMap[y * width + x] = temp[i].colour;
+                        //sets a colour based on height
                         break;
                     }
                 }
             }
         }
 
-
+        //This just draws all the different maps
         MapDisplay display = FindObjectOfType<MapDisplay>();
         if(draw == Draw.nMap)
         {
             display.DrawTexture(textureGen.textureFromHeight(nMap));
-        } else if(draw == Draw.cMap)
+        } else if (draw == Draw.tMap)
+        {
+            display.DrawTexture(textureGen.textureColourMap(tMap, width, height));
+        }
+        else if(draw == Draw.cMap)
         {
             display.DrawTexture(textureGen.textureColourMap(cMap, width, height));
         } else if(draw == Draw.mesh)
@@ -91,12 +110,14 @@ public class MapGen : MonoBehaviour
         {
             display.DrawTexture(textureGen.textureFromHeight(FallOff.GenFallOffMap(100)));
         }
-
+        //updates the mesh heights and terrain material when the presets are changed
         textureStorage.UpdateMeshHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
         textureStorage.ApplyToMaterial(terrainMaterial);
 
     }
 
+
+    //think this is obsolete now, may need to remove it
     [System.Serializable]
     public struct Terrain
     {

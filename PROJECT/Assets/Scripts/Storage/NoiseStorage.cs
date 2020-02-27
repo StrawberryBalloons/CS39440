@@ -6,7 +6,7 @@ public class NoiseStorage : Updater
 {
     public float noiseModifier;
 
-    public int oct; //octaves
-    public float persist; //persistance
-    public float lac; //lacuna
+    public int oct; //octaves 
+    public float persist; //persistance 
+    public float lac; //lacunarity
 }

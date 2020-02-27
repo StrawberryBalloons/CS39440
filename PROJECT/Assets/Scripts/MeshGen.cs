@@ -6,7 +6,7 @@ public static class MeshGen
 {//E06LOD LEFT4
 
     public static MData GenMesh(float[,] hMap, float hMultiplier, AnimationCurve mhCurve)
-    {
+    {// the reason why the height map is between 0 and 1 and not 0 to 255
         int width = hMap.GetLength(0);
         int height = hMap.GetLength(1);
         float tlX = (width - 1) / -2f; 
@@ -15,6 +15,8 @@ public static class MeshGen
         MData mesh = new MData(width, height);
         int vertIndex = 0;
 
+        //generates a mirror of the height map as a mesh where the white are high areas and the black are low areas
+        //uses a curve to make the black areas flat for water, this may need to be changed for the water mechanics
         for (int y = 0; y< height; y++) {
             for (int x = 0; x < width; x++) {
 
@@ -35,7 +37,7 @@ public static class MeshGen
 }
 
 public class MData
-{
+{//stores mesh data, partially obsolete now due to presets
     public Vector3[] verticies;
     public int[] triangles;
     public Vector2[] uvs;

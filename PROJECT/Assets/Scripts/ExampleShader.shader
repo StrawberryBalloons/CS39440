@@ -31,7 +31,7 @@
 		}
 
 		void surf(Input IN, inout SurfaceOutputStandard o) {
-
+			//sets colours based on height and blends them together
 			float heightPercent = inverseLerp(minHeight,maxHeight, IN.worldPos.y);
 			for (int i = 0; i < 8; i++) {
 				float drawStrength = inverseLerp(-baseBlends[i]/2 - epsilon, baseBlends[i]/2, heightPercent - baseStartHeights[i]);

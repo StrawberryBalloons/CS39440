@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Updater : ScriptableObject
 {
+    //I should probably put all the things that need updating in here, not just some of them
     public event System.Action OnValueUpdate;
-
     public bool autoUpdate;
 
     protected virtual void OnValidate()

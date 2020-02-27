@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FallOff
 {
+    //not sure if I will use this class, may become obsolete soon if I decide I don't want islands
     public static float[,] GenFallOffMap(int size)
     {
+        //generates a height map with all the borders being black
         float[,] map = new float[size, size];
 
         for (int i = 0; i < size; i++)
@@ -23,6 +25,7 @@ public class FallOff
         return map;
     }
 
+    //can't remember what this one does, I think it adjusts border size
     static float Eval(float value)
     {
         float a = 3;
