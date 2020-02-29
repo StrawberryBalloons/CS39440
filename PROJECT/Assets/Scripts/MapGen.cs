@@ -19,11 +19,13 @@ public class MapGen : MonoBehaviour
     public TerrainStorage terrainStorage;
     public NoiseStorage noiseStorage;
     public TextureStorage textureStorage;
+    public WaterStorage waterStorage;
 
     public Terrain[] biomes; //just colours really, only needed for the Colour map now
     public Terrain[] temp; //just colours really, only needed for the Colour map now
 
     public Material terrainMaterial;
+    public Material waterMaterial;
 
 
 
@@ -113,6 +115,7 @@ public class MapGen : MonoBehaviour
         //updates the mesh heights and terrain material when the presets are changed
         textureStorage.UpdateMeshHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
         textureStorage.ApplyToMaterial(terrainMaterial);
+        waterStorage.ApplyToMaterial(waterMaterial);
 
     }
 
