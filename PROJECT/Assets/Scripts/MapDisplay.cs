@@ -31,4 +31,17 @@ public class MapDisplay : MonoBehaviour
         GameObject.Find("Meshy").AddComponent<MeshCollider>();
         
     }
+    public void DrawWaterMesh(MData mData)
+    {
+
+        if (!GameObject.Find("WaterMeshy"))
+        {
+            mObj = new GameObject("WaterMeshy");
+        }
+        mFilter.sharedMesh = mData.cMesh();
+        //mRenderer.sharedMaterial.mainTexture = tex;
+        DestroyImmediate(GameObject.Find("WaterMeshy").GetComponent<MeshCollider>());
+        GameObject.Find("WaterMeshy").AddComponent<MeshCollider>();
+
+    }
 }

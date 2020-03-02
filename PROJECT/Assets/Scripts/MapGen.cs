@@ -6,6 +6,8 @@ public class MapGen : MonoBehaviour
 {
     //E037M Leftoff
 
+
+        
         public enum Draw
     {
         nMap, cMap, mesh, fallOff, tMap
@@ -15,6 +17,7 @@ public class MapGen : MonoBehaviour
     public int height;
     float[,] fall;
     public bool autoUpdate;
+    public float[,] nMap;
 
     public TerrainStorage terrainStorage;
     public NoiseStorage noiseStorage;
@@ -27,7 +30,14 @@ public class MapGen : MonoBehaviour
     public Material terrainMaterial;
     public Material waterMaterial;
 
-
+    public int getHeight()
+    {
+        return this.height;
+    }
+    public int getWidth()
+    {
+        return this.width;
+    }
 
     void OnValuesUpdates()
     {
@@ -56,7 +66,7 @@ public class MapGen : MonoBehaviour
         }
 
         fall = FallOff.GenFallOffMap(100); 
-        float[,] nMap = NoiseMap.GenMap(width, height, noiseStorage.noiseModifier, noiseStorage.oct, noiseStorage.persist, noiseStorage.lac);
+        nMap = NoiseMap.GenMap(width, height, noiseStorage.noiseModifier, noiseStorage.oct, noiseStorage.persist, noiseStorage.lac);
         //gets the Noisemap from the example files
         Color[] cMap = new Color[width * height];
         Color[] tMap = new Color[width * height];
