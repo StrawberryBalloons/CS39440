@@ -5,7 +5,6 @@ using UnityEngine;
 public class TerrainStorage: Updater
 {
     public float mHMultiplier;
-
     public AnimationCurve mhCurve;
     public bool useFallOff;
 

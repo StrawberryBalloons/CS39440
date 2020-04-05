@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: example Noise
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  noiseModifier: 41.4
+  noiseModifier: 108.6
   oct: 8
   persist: 0.25
-  lac: 2.57
+  lac: 3

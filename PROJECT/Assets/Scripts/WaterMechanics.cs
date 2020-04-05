@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaterMechanics : MonoBehaviour
 {
     public TerrainStorage terrainStorage;
     public NoiseStorage noiseStorage;
+    public WaterOverlay waterMap;
     private GameObject mObj;
+    public float[,] waterOverlay;
+    public float[,] terrainMap;
+    float[,] adjustedMap;
 
     int width;
     int height;
-    float[,] waterOverlay;
-    float[,] terrainMap;
-    float[,] adjustedMap;
+
     MapDisplay display;
 
     void Start()
@@ -30,86 +34,143 @@ public class WaterMechanics : MonoBehaviour
         display.DrawWaterMesh(MeshGen.GenMesh(terrainMap, terrainStorage.mHMultiplier, terrainStorage.mhCurve));
         waterOverlay = new float[width, height];
         adjustedMap = new float[width, height];
+        initOverlay();//init overlay to no water(all 0's)
+        //waterAddingLoops();
+    }
 
-        //init overlay to no water(all 0's)
+    void Update()
+    {
+        //addWater(50, 50, 0.01f);
+    }
+
+    //need to account for out of bounds in code
+    private void waterFlow(int prevX, int prevY, float input)
+    {
+        float currentHeight , smallest;
+        int nextX, nextY;
+        nextX = prevX;
+        nextY = prevY;
+        //currentHeight = terrainMap[prevX, prevY];//terrain height of water source(start height)
+        //currentHeight += waterOverlay[prevX, prevY];//water plus height of terrain = adjusted water height
+        currentHeight = terrainMap[prevX, prevY] + waterOverlay[prevX, prevY];
+        smallest = currentHeight;
+        //Debug.Log("water flow");
+        for (int x = -1; x < 2; x++)//checks the surrounding vertices
+        {
+            for (int y = -1; y < 2; y++)
+            {
+                int ox = prevX + x;
+                int oy = prevY + y;
+                checkBounds(ref ox, ref oy);
+                //Debug.Log("x = " + prevX + " y = " + prevY);
+                if (currentHeight > terrainMap[ox, oy] + waterOverlay[ox, oy])//if height of water is greater than the surrounding terrain (changed to terrainmap + waterOverlay) terrainMap[ox, oy] + waterOverlay to adjusted
+                {
+                    if (smallest > terrainMap[ox, oy] + waterOverlay[ox, oy])//take the height of the location with the steepest gradient (changed to terrainmap + waterOverlay)
+                    {
+                        if (ox > 0 && oy > 0 && ox < 100 && oy < 100)//water doesn't go past the borders
+                        {
+                            smallest = terrainMap[ox, oy] + waterOverlay[ox, oy]; // (changed to terrainmap + waterOverlay)
+                            nextX = ox;
+                            nextY = oy;
+                        }
+                    }
+                }
+            }
+        }
+        waterOptionSelect(prevX, prevY, nextX, nextY, input);
+    }
+
+    private static void checkBounds(ref int ox, ref int oy)
+    {
+        if (ox < 1)
+        {
+            ox = 1;
+        }
+        else if (oy > 99)
+        {
+            oy = 99;
+        }
+        else if (oy < 1)
+        {
+            oy = 1;
+        }
+        else if (ox > 99)
+        {
+            ox = 99;
+        }
+    }
+
+    private void waterOptionSelect(int originX, int originY, int newX, int newY, float input)
+    { 
+        float adjustedOrigin = terrainMap[originX, originY] + waterOverlay[originX, originY];//height of originX originY
+        float adjustedNew = terrainMap[newX, newY] + waterOverlay[newX, newY]; //height of newX newY
+        if (waterOverlay[originX, originY] > 0.0f && waterOverlay[newX, newY] > 0.0f && waterOverlay[originX, originY] >= waterOverlay[newX, newY] && (newX != originX || newY != originY))
+        { 
+            Debug.Log("overlay " + originX + " " + originY + " moving to " + newX + " " + newY);
+            Debug.Log("origin " + terrainMap[originX, originY] + " " + waterOverlay[originX, originY] + "  new " + terrainMap[newX, newY] + " " + waterOverlay[newX, newY]);
+            //this should keep the water flowing instead of spiking, the if may need work
+            waterFlow(newX, newY, input);//recursive 
+        }
+        else if (adjustedNew < adjustedOrigin && (newX != originX || newY != originY) && newX != 100 && newY != 100)//if the water height of the new is less than the original
+        {
+
+            //waterOverlay[newX, newY] += input;//moves the water in a flow, there is no loss (changed to += input)
+            //waterOverlay[originX, originY] = waterOverlay[originX, originY] - input; //(change to -= input)
+            //applyWater(); //this should make the travel path visible but doesn't work
+
+            Debug.Log(originX + " " + originY + " moving to " + newX + " " + newY);
+            Debug.Log("origin " + terrainMap[originX, originY] + " " + waterOverlay[originX, originY] + "  new " + terrainMap[newX, newY] + " " + waterOverlay[newX, newY]);
+            waterFlow(newX, newY, input);//recursive 
+        }
+        else if (newX == originX && newY == originY) //water has found a minimum, if sx and sy are the same as x and y then there is no lower area around them
+        {
+            Debug.Log("basin " + newX + " " + newY + " water " + waterOverlay[newX, newY]);
+            basin(newX, newY, input);
+        } else
+        {
+            Debug.Log("Error");
+        }
+
+    }
+
+    private void basin(int x, int y, float water)
+    {
+        waterOverlay[x, y] += water;//moves the water in a flow, there is no loss (changed to += input)
+        applyWater();
+    }
+
+    private void initOverlay()
+    {
         for (int x = 0; x < height; x++)
         {
             for (int y = 0; y < width; y++)
             {
-                adjustedMap[x, y] = terrainMap[x, y];
                 waterOverlay[x, y] = 0;
+                adjustedMap[x, y] = terrainMap[x, y];
             }
         }
-
-        addWater(2, 2, 1);
-
+    }
+    public float[,] getWaterOverlay()
+    {
+        return waterOverlay;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void waterAddingLoops()
     {
-
+        int x, z;
+        for (int i = 0; i < 10; i++)
+        {
+            x = UnityEngine.Random.Range(50, 51);
+            z = UnityEngine.Random.Range(50, 51);
+            addWater(x, z, 0.001f);
+        }
     }
 
     //x and y for now but may need to take location dynamically
     public void addWater(int x, int y, float input)
     {
-        waterOverlay[x, y] = input;
-        if (waterOverlay[x, y] - input == 0)
-        {
-            waterFlow(x, y);
-        }
-        else {
-            waterDisperse(x, y);
-        }
+        waterFlow(x, y, input);
         applyWater();
-    }
-
-    private void waterDisperse(int x, int y)
-    {
-        throw new NotImplementedException();
-    }
-
-    //need to account for out of bounds in code
-    private void waterFlow(int x, int y)
-    {
-        float sHeight, smallest;
-        int sx, sy;
-        sx = x;
-        sy = y;
-        smallest = 1;
-        sHeight = terrainMap[x, y];//terrain height of water source(start height)
-        sHeight += waterOverlay[x, y];//water plus height of terrain = adjusted water height
-        for (int xx = -1; xx < 2; xx++)//checks the surrounding vertices
-        {
-            for (int yy = -1; yy < 2; yy++)
-            {
-                Debug.Log("xx = " + xx + " yy = " + yy);
-                Debug.Log("x = " + x + " y = " + y);
-                if (sHeight > terrainMap[x + xx, y + yy])//if height of water is greater than the surrounding terrain
-                {
-                    if (terrainMap[x + xx, y + yy] < smallest)//find the lowest point and take the value
-                    {
-                        smallest = terrainMap[x + xx, y + yy];
-                        sx = x + xx;
-                        sy = y + yy;
-                    }
-                }
-            }
-        }
-
-        if (waterOverlay[sx, sy] == 0 && (sx != x && sy != y))//if the water flow continues
-        {
-            waterOverlay[sx, sy] = waterOverlay[x, y];//moves the water in a flow, there is no loss
-            waterOverlay[x, y] = 0;
-            waterFlow(sx, sy);//recursive 
-        } else if(waterOverlay[sx, sy] > 0 && (sx != x && sy != y)) //if the water flows into a body of water
-        {
-            waterDisperse(sx, sy);
-        } else if (sx == x && sy == y) //water has found a minimum, if sx and sy are the same as x and y then there is no lower area around them
-        {
-            //not sure if I need anything here
-        }
     }
 
     private void applyWater()
@@ -118,7 +179,10 @@ public class WaterMechanics : MonoBehaviour
         {
             for (int y = 0; y < width; y++)
             {
-                adjustedMap[x, y] = terrainMap[x, y] + waterOverlay[x, y];
+                if (waterOverlay[x, y] > 0)
+                {
+                    adjustedMap[x, y] += waterOverlay[x, y];
+                }
             }
         }
         display.DrawWaterMesh(MeshGen.GenMesh(adjustedMap, terrainStorage.mHMultiplier, terrainStorage.mhCurve));

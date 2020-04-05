@@ -10,7 +10,6 @@ public class MapgenEdit : Editor
     public override void OnInspectorGUI()
     {
             MapGen mGen = (MapGen)target;
-
         if (DrawDefaultInspector())
         {
             if (mGen.autoUpdate)

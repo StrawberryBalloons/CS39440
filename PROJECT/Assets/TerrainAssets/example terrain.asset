@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: example terrain
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  mHMultiplier: 50.7
+  mHMultiplier: 25
   mhCurve:
     serializedVersion: 2
     m_Curve:

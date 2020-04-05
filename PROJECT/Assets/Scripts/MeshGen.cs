@@ -37,7 +37,7 @@ public static class MeshGen
 }
 
 public class MData
-{//stores mesh data, partially obsolete now due to presets
+{
     public Vector3[] verticies;
     public int[] triangles;
     public Vector2[] uvs;

@@ -71,11 +71,16 @@
     <Compile Include="Assets\Scripts\Storage\TerrainStorage.cs" />
     <Compile Include="Assets\Scripts\Storage\TextureStorage.cs" />
     <Compile Include="Assets\Scripts\Storage\Updater.cs" />
+    <Compile Include="Assets\Scripts\Storage\WaterOverlay.cs" />
     <Compile Include="Assets\Scripts\Storage\WaterStorage.cs" />
+    <Compile Include="Assets\Scripts\TreeGen.cs" />
+    <Compile Include="Assets\Scripts\TreeMechanics.cs" />
     <Compile Include="Assets\Scripts\WaterMechanics.cs" />
+    <Compile Include="Assets\Scripts\seed.cs" />
     <Compile Include="Assets\Scripts\textureGen.cs" />
     <Compile Include="Assets\SuperScripts\MapGenEdit.cs" />
     <Compile Include="Assets\SuperScripts\UpdateData.cs" />
+    <Compile Include="Assets\SuperScripts\WaterAdder.cs" />
     <None Include="Assets\Scripts\WaterShader.shader" />
     <None Include="Assets\Scripts\ExampleLandShader.shader" />
     <Reference Include="Unity.Timeline.Editor">

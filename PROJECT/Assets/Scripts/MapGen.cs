@@ -23,6 +23,7 @@ public class MapGen : MonoBehaviour
     public NoiseStorage noiseStorage;
     public TextureStorage textureStorage;
     public WaterStorage waterStorage;
+    public WaterOverlay waterOverlay;
 
     public Terrain[] biomes; //just colours really, only needed for the Colour map now
     public Terrain[] temp; //just colours really, only needed for the Colour map now

@@ -6,6 +6,7 @@ public class MapDisplay : MonoBehaviour
 {
     public Renderer textureRender;
     public MeshFilter mFilter;
+    public MeshFilter wmFilter;
     private MeshCollider mCollider;
     private GameObject mObj;
     public MeshRenderer mRenderer;
@@ -38,7 +39,7 @@ public class MapDisplay : MonoBehaviour
         {
             mObj = new GameObject("WaterMeshy");
         }
-        mFilter.sharedMesh = mData.cMesh();
+        wmFilter.sharedMesh = mData.cMesh();
         //mRenderer.sharedMaterial.mainTexture = tex;
         DestroyImmediate(GameObject.Find("WaterMeshy").GetComponent<MeshCollider>());
         GameObject.Find("WaterMeshy").AddComponent<MeshCollider>();
