@@ -73,16 +73,29 @@
     <Compile Include="Assets\Scripts\Storage\Updater.cs" />
     <Compile Include="Assets\Scripts\Storage\WaterOverlay.cs" />
     <Compile Include="Assets\Scripts\Storage\WaterStorage.cs" />
-    <Compile Include="Assets\Scripts\TreeGen.cs" />
-    <Compile Include="Assets\Scripts\TreeMechanics.cs" />
-    <Compile Include="Assets\Scripts\WaterMechanics.cs" />
-    <Compile Include="Assets\Scripts\seed.cs" />
+    <Compile Include="Assets\Scripts\Tree\TestTreeLSystem.cs" />
+    <Compile Include="Assets\Scripts\Tree\TestTreeMechanics.cs" />
+    <Compile Include="Assets\Scripts\Tree\TreeElement.cs" />
+    <Compile Include="Assets\Scripts\Tree\TreeGen.cs" />
+    <Compile Include="Assets\Scripts\Tree\TreeLSystem.cs" />
+    <Compile Include="Assets\Scripts\Tree\TreeMechanics.cs" />
+    <Compile Include="Assets\Scripts\Tree\TreeTransform.cs" />
+    <Compile Include="Assets\Scripts\Water\WaterAdder.cs" />
+    <Compile Include="Assets\Scripts\Water\WaterElement.cs" />
+    <Compile Include="Assets\Scripts\Water\WaterMechanics.cs" />
+    <Compile Include="Assets\Scripts\Water\WaterMechanicsTest.cs" />
+    <Compile Include="Assets\Scripts\dayNightHandler.cs" />
     <Compile Include="Assets\Scripts\textureGen.cs" />
     <Compile Include="Assets\SuperScripts\MapGenEdit.cs" />
     <Compile Include="Assets\SuperScripts\UpdateData.cs" />
-    <Compile Include="Assets\SuperScripts\WaterAdder.cs" />
-    <None Include="Assets\Scripts\WaterShader.shader" />
+    <None Include="Assets\Scripts\Water\WaterShader.shader" />
     <None Include="Assets\Scripts\ExampleLandShader.shader" />
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>C:/Users/Callum Gunter/Documents/GitHub/CS39440/PROJECT/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TestRunner">
+      <HintPath>C:/Users/Callum Gunter/Documents/GitHub/CS39440/PROJECT/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Callum Gunter/Documents/GitHub/CS39440/PROJECT/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -292,6 +305,9 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>C:/Users/Callum Gunter/Documents/GitHub/CS39440/PROJECT/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

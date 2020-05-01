@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGen : MonoBehaviour
+
 {
     //E037M Leftoff
 
@@ -118,6 +119,7 @@ public class MapGen : MonoBehaviour
         } else if(draw == Draw.mesh)
         {
             display.DrawMesh(MeshGen.GenMesh(nMap, terrainStorage.mHMultiplier, terrainStorage.mhCurve), (textureGen.textureColourMap(cMap, width, height)));
+            display.DrawWaterMesh(MeshGen.GenMesh(nMap, terrainStorage.mHMultiplier, terrainStorage.mhCurve));
         } 
         else if (draw == Draw.fallOff)
         {

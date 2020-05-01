@@ -6,6 +6,8 @@ public class TerrainStorage: Updater
 {
     public float mHMultiplier;
     public AnimationCurve mhCurve;
+    public AnimationCurve whCurve;
+    public float whMultiplier;
     public bool useFallOff;
 
     public float minHeight
