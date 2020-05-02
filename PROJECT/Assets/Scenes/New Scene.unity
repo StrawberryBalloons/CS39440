@@ -1082,7 +1082,7 @@ MonoBehaviour:
   leafGenitor: {fileID: 1297165066998070, guid: 462e227495dc4ef49abea8c40d6b6d24,
     type: 3}
   mutationChance: 10
-  motherFatherDominance: 45
+  dominantParent: 45
 --- !u!1 &2120734454
 GameObject:
   m_ObjectHideFlags: 0
