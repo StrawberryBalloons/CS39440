@@ -10,15 +10,7 @@ namespace Tests
     public class WaterMechanicsTest
     {
         // A Test behaves as an ordinary method
-        [Test]
-        public void WaterMechanicsTestSimplePasses()
-        {
-            //ARRANGE
 
-            //ACT
-
-            //ASSERT
-        }
 
 
         [Test]
@@ -36,15 +28,6 @@ namespace Tests
             Assert.That(overlay[0,0], Is.EqualTo(expected));
         }
 
-        [Test]
-        public void TestWaterFlow()
-        {
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-        }//can't be tested
 
         [Test]
         public void TestCheckBounds()
@@ -71,8 +54,8 @@ namespace Tests
                 minBound = 99;
             }
             //ASSERT
-            Assert.That(minBound, Is.EqualTo(1));
-            Assert.That(maxBound, Is.EqualTo(99));
+            Assert.That(minBound, Is.GreaterThanOrEqualTo(1));
+            Assert.That(maxBound, Is.LessThanOrEqualTo(99));
         }
 
 
@@ -115,15 +98,6 @@ namespace Tests
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void TestBasin()//not testable, it's an assignment
-        {
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-        }
 
         [Test]
         public void TestInitOverlay()
@@ -167,15 +141,7 @@ namespace Tests
             Assert.That(result, Is.True);
         }
 
-        [Test]
-        public void TestAddWater()//not testable, just a call to other scripts
-        {
-            //ARRANGE
 
-            //ACT
-
-            //ASSERT
-        }
 
         [Test]
         public void TestApplyWater()
@@ -200,12 +166,6 @@ namespace Tests
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
-        [UnityTest]
-        public IEnumerator WaterMechanicsTestWithEnumeratorPasses()
-        {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
-        }
+        
     }
 }

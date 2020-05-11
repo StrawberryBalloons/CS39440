@@ -11,12 +11,7 @@ namespace Tests
     {
 
         // A Test behaves as an ordinary method
-        [Test]
-        public void TestTreeLSystemSimplePasses()
-        {
 
-
-        }
 
         [Test]
         public void TestAwake()
@@ -52,17 +47,6 @@ namespace Tests
             Assert.That(Lsystem.patriarch, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void TestGenerate()
-        {
-            //No way to test line renderer from editor and mechanical aspects tested in Awake
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-            Assert.That(1, Is.Negative);
-        }
 
     }
 }

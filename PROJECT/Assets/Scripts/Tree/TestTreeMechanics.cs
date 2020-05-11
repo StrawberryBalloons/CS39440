@@ -8,28 +8,6 @@ namespace Tests
 {
     public class TestTreeMechanics
     {
-        // A Test behaves as an ordinary method
-        [Test]
-        public void TestTreeMechanicsSimplePasses()
-        {
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-
-        } //Not in use
-
-        [Test]
-        public void TestOnCollisionEnter()
-        {
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-
-        }//Not Testable
 
         [Test]
         public void TestUpdate()
@@ -128,15 +106,6 @@ namespace Tests
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void TestChuckSeed()
-        {
-            //ARRANGE
-
-            //ACT
-
-            //ASSERT
-        }//Not testable
 
         [Test]
         public void TestGetNewSpawnPos()
@@ -161,15 +130,7 @@ namespace Tests
             Assert.That(y, Is.LessThan(expected));
         }
 
-        [Test]
-        public void TestGetHeight()
-        {
-            //ARRANGE
 
-            //ACT
-
-            //ASSERT
-        }//can't be tested
         [Test]
         public void TestNearbyTree()
         {
@@ -182,14 +143,6 @@ namespace Tests
             //ASSERT
             Assert.That(result, Is.False);
         }
-        [Test]
-        public void TestGetClosest()
-        {
-            //ARRANGE
 
-            //ACT
-
-            //ASSERT
-        }// same as test nearby tree, can't be tested
     }
 }
